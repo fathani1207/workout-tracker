@@ -515,6 +515,7 @@
       const EMAILJS_PUBLIC_KEY = "hnh1w0L-aOdgqW25T";
       const EMAILJS_SERVICE_ID = "service_ss5z7rz";
       const EMAILJS_TEMPLATE_ID = "template_x2y80y9";
+      const EMAILJS_SHAME_TEMPLATE_ID = "template_2c5abts";
       const YOUR_EMAIL = "youssef.fathani1207@gmail.com";
       // ─────────────────────────────────────────────────────────────────
 
@@ -839,23 +840,23 @@
             "day-card" +
             (completed ? " completed" : inProgress ? " in-progress" : "");
           card.innerHTML = `
-      <div class="day-header" onclick="toggleDay('${day.id}')">
-        <div class="day-dot"></div>
-        <div>
-          <div class="day-name">${day.name} <span class="day-label">${day.label}</span></div>
-          <div class="day-label" style="margin-top:1px">${day.subtitle} · ${day.duration}</div>
-        </div>
-        <div class="day-progress-wrap">
-          <span class="day-progress-text">${done}/${total}</span>
-          <div class="progress-bar-sm"><div class="progress-bar-fill" style="width:${Math.round((done / total) * 100)}%"></div></div>
-          <span class="chevron">▾</span>
-        </div>
-      </div>
-      <div class="exo-body">
-        <div class="exo-list" id="exo-${day.id}"></div>
-        <div class="session-actions" id="actions-${day.id}"></div>
-      </div>
-    `;
+            <div class="day-header" onclick="toggleDay('${day.id}')">
+              <div class="day-dot"></div>
+              <div>
+                <div class="day-name">${day.name} <span class="day-label">${day.label}</span></div>
+                <div class="day-label" style="margin-top:1px">${day.subtitle} · ${day.duration}</div>
+              </div>
+              <div class="day-progress-wrap">
+                <span class="day-progress-text">${done}/${total}</span>
+                <div class="progress-bar-sm"><div class="progress-bar-fill" style="width:${Math.round((done / total) * 100)}%"></div></div>
+                <span class="chevron">▾</span>
+              </div>
+            </div>
+            <div class="exo-body">
+              <div class="exo-list" id="exo-${day.id}"></div>
+              <div class="session-actions" id="actions-${day.id}"></div>
+            </div>
+          `;
           grid.appendChild(card);
 
           const list = document.getElementById(`exo-${day.id}`);
@@ -864,11 +865,11 @@
             const row = document.createElement("div");
             row.className = "exo-row" + (isDone ? " done" : "");
             row.innerHTML = `
-        <div class="exo-check">${isDone ? "✓" : ""}</div>
-        <div><div class="exo-name">${ex.name}</div><div class="exo-muscle">${ex.muscle}</div></div>
-        <div class="exo-sets">${ex.sets}</div>
-        <div class="exo-rest">${ex.rest}</div>
-      `;
+              <div class="exo-check">${isDone ? "✓" : ""}</div>
+              <div><div class="exo-name">${ex.name}</div><div class="exo-muscle">${ex.muscle}</div></div>
+              <div class="exo-sets">${ex.sets}</div>
+              <div class="exo-rest">${ex.rest}</div>
+            `;
             row.onclick = () => toggleExercise(day.id, i);
             list.appendChild(row);
           });
@@ -876,9 +877,10 @@
           const actions = document.getElementById(`actions-${day.id}`);
           if (completed) {
             actions.innerHTML = `<button class="btn-ghost" onclick="resetDay('${day.id}', event)">Reset session</button>
-        <button class="btn-primary" onclick="finishSession('${day.id}', event)">Send summary ✉</button>`;
+              <button class="btn-primary" onclick="finishSession('${day.id}', event)">Send summary ✉</button>`;
           } else if (inProgress) {
-            actions.innerHTML = `<button class="btn-ghost" onclick="resetDay('${day.id}', event)">Reset</button>`;
+            actions.innerHTML = `<button class="btn-ghost" onclick="resetDay('${day.id}', event)">Reset</button>
+              <button class="btn-primary" onclick="finishSession('${day.id}', event)">Send summary ✉</button>`;
           }
         });
 
@@ -1002,12 +1004,19 @@
         }
 
         emailjs.init(EMAILJS_PUBLIC_KEY);
+        const templateId = completed
+          ? EMAILJS_TEMPLATE_ID
+          : EMAILJS_SHAME_TEMPLATE_ID;
         emailjs
-          .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          .send(EMAILJS_SERVICE_ID, templateId, {
             to_email: YOUR_EMAIL,
             day_name: `${day.name} · ${day.subtitle}`,
             session_date: today,
             exercises_done: doneExos,
+            exercises_left: day.exercises
+              .filter((_, i) => !state[i])
+              .map((ex) => `• ${ex.name}`)
+              .join("\n"),
           })
           .then(() => {
             toast("Summary sent to your email ✓");
@@ -1061,13 +1070,13 @@
             )
             .join("");
           card.innerHTML = `
-      <div class="history-top">
-        <div class="history-day-name">${h.dayName} <span style="font-size:13px;color:var(--text-secondary);font-family:'DM Sans'">${h.subtitle}</span></div>
-        <div class="history-date">${dateStr}</div>
-      </div>
-      <div class="history-exos">${tags}</div>
-      ${h.next ? `<div style="margin-top:12px;font-size:11px;color:var(--text-muted)">Next: ${h.next}</div>` : ""}
-    `;
+            <div class="history-top">
+              <div class="history-day-name">${h.dayName} <span style="font-size:13px;color:var(--text-secondary);font-family:'DM Sans'">${h.subtitle}</span></div>
+              <div class="history-date">${dateStr}</div>
+            </div>
+            <div class="history-exos">${tags}</div>
+            ${h.next ? `<div style="margin-top:12px;font-size:11px;color:var(--text-muted)">Next: ${h.next}</div>` : ""}
+          `;
           container.appendChild(card);
         });
       }
