@@ -3,31 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Workout Tracker</title>
+    <title>Forge — Workout Tracker</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Syne:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
       :root {
-        --bg-base: #0d0f14;
-        --bg-surface: #13161e;
-        --bg-card: #181c26;
-        --bg-hover: #1f2333;
-        --accent-gold: #b8945f;
-        --accent-gold-dim: #7a6040;
-        --accent-gold-glow: rgba(184, 148, 95, 0.08);
-        --text-primary: #e8e0d4;
-        --text-secondary: #8a8478;
-        --text-muted: #4a4840;
-        --border: rgba(184, 148, 95, 0.12);
-        --border-hover: rgba(184, 148, 95, 0.28);
-        --success: #4a7c59;
-        --success-bg: rgba(74, 124, 89, 0.12);
-        --danger: #7c4a4a;
-        --radius: 8px;
-        --radius-lg: 14px;
+        --bg-base: #080808;
+        --bg-surface: #0f0f0f;
+        --bg-card: #141414;
+        --bg-hover: #1a1a1a;
+        --cherry: #c0152a;
+        --cherry-dim: #7a0d1a;
+        --cherry-glow: rgba(192, 21, 42, 0.1);
+        --cherry-border: rgba(192, 21, 42, 0.3);
+        --text-primary: #f0f0f0;
+        --text-secondary: #666;
+        --text-muted: #333;
+        --border: rgba(255, 255, 255, 0.06);
+        --border-hover: rgba(255, 255, 255, 0.12);
+        --success: #1a6b3a;
+        --success-bg: rgba(26, 107, 58, 0.12);
+        --success-border: rgba(26, 107, 58, 0.25);
+        --radius: 6px;
+        --radius-lg: 12px;
       }
       *,
       *::before,
@@ -42,13 +43,14 @@
       body {
         background: var(--bg-base);
         color: var(--text-primary);
-        font-family: "DM Sans", sans-serif;
+        font-family: "Space Grotesk", sans-serif;
         font-weight: 300;
         font-size: 14px;
         line-height: 1.6;
         min-height: 100vh;
       }
-      /* LAYOUT */
+
+      /* ── LAYOUT ── */
       .app {
         display: flex;
         flex-direction: column;
@@ -58,39 +60,39 @@
         position: sticky;
         top: 0;
         z-index: 100;
-        background: rgba(13, 15, 20, 0.92);
-        backdrop-filter: blur(12px);
+        background: rgba(8, 8, 8, 0.95);
+        backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--border);
         padding: 0 32px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 60px;
+        height: 56px;
       }
       .logo {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 20px;
-        font-weight: 400;
-        letter-spacing: 0.08em;
-        color: var(--accent-gold);
+        font-family: "Syne", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-primary);
       }
       .logo span {
-        color: var(--text-secondary);
-        font-weight: 300;
+        color: var(--cherry);
       }
       nav {
         display: flex;
-        gap: 4px;
+        gap: 2px;
       }
       .nav-btn {
         background: none;
         border: none;
         cursor: pointer;
-        font-family: "DM Sans", sans-serif;
-        font-size: 12px;
-        font-weight: 400;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
         color: var(--text-secondary);
-        letter-spacing: 0.06em;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
         padding: 6px 14px;
         border-radius: var(--radius);
@@ -101,42 +103,79 @@
         background: var(--bg-hover);
       }
       .nav-btn.active {
-        color: var(--accent-gold);
-        background: var(--accent-gold-glow);
+        color: var(--cherry);
+        background: var(--cherry-glow);
       }
+
       main {
         flex: 1;
-        padding: 40px 32px;
-        max-width: 900px;
+        padding: 36px 32px;
+        max-width: 860px;
         margin: 0 auto;
         width: 100%;
       }
-      /* PAGES */
+
+      /* ── PAGES ── */
       .page {
         display: none;
       }
       .page.active {
         display: block;
       }
-      /* SECTION TITLES */
+
       .page-title {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 28px;
-        font-weight: 400;
-        letter-spacing: 0.04em;
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
         color: var(--text-primary);
-        margin-bottom: 6px;
+        margin-bottom: 4px;
       }
       .page-sub {
-        font-size: 13px;
+        font-size: 12px;
         color: var(--text-secondary);
-        margin-bottom: 32px;
+        margin-bottom: 28px;
+        letter-spacing: 0.02em;
       }
-      /* DAY CARDS */
+
+      /* ── NEXT BANNER ── */
+      .next-banner {
+        background: var(--cherry-glow);
+        border: 1px solid var(--cherry-border);
+        border-radius: var(--radius-lg);
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+      .next-banner-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--cherry);
+        flex-shrink: 0;
+      }
+      .next-banner-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--cherry-dim);
+      }
+      .next-banner-name {
+        font-family: "Syne", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--cherry);
+        letter-spacing: 0.04em;
+      }
+
+      /* ── DAY CARDS ── */
       .days-grid {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 8px;
       }
       .day-card {
         background: var(--bg-card);
@@ -148,19 +187,26 @@
       .day-card:hover {
         border-color: var(--border-hover);
       }
+      .day-card.completed {
+        border-color: var(--success-border);
+      }
+      .day-card.in-progress {
+        border-color: rgba(192, 21, 42, 0.2);
+      }
+
       .day-header {
         display: flex;
         align-items: center;
-        gap: 16px;
-        padding: 18px 22px;
+        gap: 14px;
+        padding: 16px 20px;
         cursor: pointer;
         user-select: none;
       }
       .day-dot {
-        width: 8px;
-        height: 8px;
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
-        background: var(--accent-gold-dim);
+        background: var(--text-muted);
         flex-shrink: 0;
         transition: background 0.3s;
       }
@@ -168,41 +214,44 @@
         background: var(--success);
       }
       .day-card.in-progress .day-dot {
-        background: var(--accent-gold);
+        background: var(--cherry);
       }
+
       .day-name {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 17px;
-        font-weight: 500;
-        letter-spacing: 0.04em;
+        font-family: "Syne", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
       }
       .day-label {
         font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
         color: var(--text-secondary);
-        margin-left: 2px;
+        letter-spacing: 0.02em;
+        margin-top: 1px;
       }
+
       .day-progress-wrap {
         margin-left: auto;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
       }
       .day-progress-text {
-        font-size: 12px;
+        font-size: 11px;
         color: var(--text-secondary);
+        font-variant-numeric: tabular-nums;
       }
       .progress-bar-sm {
-        width: 80px;
-        height: 3px;
+        width: 72px;
+        height: 2px;
         background: var(--bg-hover);
         border-radius: 2px;
         overflow: hidden;
       }
       .progress-bar-fill {
         height: 100%;
-        background: var(--accent-gold);
+        background: var(--cherry);
         border-radius: 2px;
         transition: width 0.4s ease;
       }
@@ -210,18 +259,19 @@
         background: var(--success);
       }
       .chevron {
-        font-size: 11px;
+        font-size: 10px;
         color: var(--text-muted);
         transition: transform 0.25s;
-        margin-left: 8px;
+        margin-left: 6px;
       }
       .day-card.open .chevron {
         transform: rotate(180deg);
       }
-      /* EXERCISE TABLE */
+
+      /* ── EXERCISE LIST ── */
       .exo-body {
         display: none;
-        padding: 0 22px 20px;
+        padding: 0 20px 18px;
       }
       .day-card.open .exo-body {
         display: block;
@@ -229,21 +279,22 @@
       .exo-list {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
       }
+
       .exo-row {
         display: grid;
-        grid-template-columns: 24px 1fr auto auto;
+        grid-template-columns: 22px 1fr auto auto;
         align-items: center;
         gap: 12px;
-        padding: 12px 14px;
+        padding: 11px 14px;
         background: var(--bg-surface);
         border-radius: var(--radius);
         border: 1px solid transparent;
+        cursor: pointer;
         transition:
           border-color 0.2s,
           background 0.2s;
-        cursor: pointer;
       }
       .exo-row:hover {
         border-color: var(--border);
@@ -251,19 +302,20 @@
       }
       .exo-row.done {
         background: var(--success-bg);
-        border-color: rgba(74, 124, 89, 0.2);
+        border-color: var(--success-border);
       }
+
       .exo-check {
-        width: 20px;
-        height: 20px;
-        border-radius: 5px;
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
         border: 1px solid var(--text-muted);
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
         transition: all 0.2s;
-        font-size: 11px;
+        font-size: 10px;
         color: transparent;
       }
       .exo-row.done .exo-check {
@@ -271,9 +323,11 @@
         border-color: var(--success);
         color: #fff;
       }
+
       .exo-name {
         font-size: 13px;
         font-weight: 400;
+        color: var(--text-primary);
       }
       .exo-muscle {
         font-size: 11px;
@@ -281,94 +335,92 @@
         margin-top: 1px;
       }
       .exo-sets {
-        font-size: 12px;
+        font-size: 11px;
         color: var(--text-secondary);
         background: var(--bg-card);
         padding: 3px 9px;
         border-radius: 20px;
         white-space: nowrap;
+        border: 1px solid var(--border);
       }
       .exo-rest {
         font-size: 11px;
         color: var(--text-muted);
         white-space: nowrap;
       }
-      /* START SESSION BTN */
+
+      /* ── ACTIONS ── */
       .session-actions {
         display: flex;
-        gap: 10px;
-        margin-top: 16px;
+        gap: 8px;
+        margin-top: 14px;
       }
       .btn-primary {
-        padding: 10px 22px;
+        padding: 9px 20px;
         border-radius: var(--radius);
-        background: var(--accent-gold);
+        background: var(--cherry);
         border: none;
         cursor: pointer;
-        font-family: "DM Sans", sans-serif;
-        font-size: 13px;
-        font-weight: 400;
-        color: #0d0f14;
-        letter-spacing: 0.04em;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: #fff;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
         transition: opacity 0.2s;
       }
       .btn-primary:hover {
         opacity: 0.85;
       }
-      .btn-primary:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-      }
       .btn-ghost {
-        padding: 10px 22px;
+        padding: 9px 20px;
         border-radius: var(--radius);
         background: none;
         border: 1px solid var(--border);
         cursor: pointer;
-        font-family: "DM Sans", sans-serif;
-        font-size: 13px;
-        font-weight: 400;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
         color: var(--text-secondary);
-        letter-spacing: 0.04em;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
         transition: all 0.2s;
       }
       .btn-ghost:hover {
         border-color: var(--border-hover);
         color: var(--text-primary);
       }
-      /* HISTORY PAGE */
+
+      /* ── HISTORY ── */
       .history-empty {
         text-align: center;
         padding: 80px 0;
         color: var(--text-muted);
         font-size: 13px;
       }
-      .history-empty .empty-icon {
-        font-size: 32px;
-        margin-bottom: 12px;
-        opacity: 0.3;
-      }
       .history-list {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
       }
       .history-card {
         background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: var(--radius-lg);
-        padding: 18px 22px;
+        padding: 18px 20px;
       }
       .history-top {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
       }
       .history-day-name {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 17px;
-        font-weight: 500;
+        font-family: "Syne", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
       }
       .history-date {
         font-size: 11px;
@@ -389,50 +441,105 @@
       }
       .history-tag.done-tag {
         background: var(--success-bg);
-        color: #6aab7e;
-        border-color: rgba(74, 124, 89, 0.2);
+        color: #4caf70;
+        border-color: var(--success-border);
       }
-      /* NEXT SESSION BANNER */
-      .next-banner {
-        background: var(--accent-gold-glow);
-        border: 1px solid var(--border-hover);
-        border-radius: var(--radius-lg);
-        padding: 16px 22px;
+
+      /* ── MODAL (email setup) ── */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: rgba(0, 0, 0, 0.85);
         display: flex;
         align-items: center;
-        gap: 14px;
-        margin-bottom: 28px;
+        justify-content: center;
+        padding: 20px;
       }
-      .next-banner-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--accent-gold);
-        flex-shrink: 0;
+      .modal-overlay.hidden {
+        display: none;
       }
-      .next-banner-label {
-        font-size: 11px;
+      .modal {
+        background: var(--bg-card);
+        border: 1px solid var(--cherry-border);
+        border-radius: var(--radius-lg);
+        padding: 36px 32px;
+        max-width: 420px;
+        width: 100%;
+      }
+      .modal-title {
+        font-family: "Syne", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--accent-gold-dim);
+        color: var(--text-primary);
+        margin-bottom: 6px;
       }
-      .next-banner-name {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 16px;
+      .modal-sub {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-bottom: 28px;
+        line-height: 1.6;
+      }
+      .modal-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--text-secondary);
+        display: block;
+        margin-bottom: 8px;
+      }
+      .modal-input {
+        width: 100%;
+        padding: 11px 14px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text-primary);
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+        margin-bottom: 20px;
+      }
+      .modal-input:focus {
+        border-color: var(--cherry-border);
+      }
+      .modal-input::placeholder {
+        color: var(--text-muted);
+      }
+      .modal-btn {
+        width: 100%;
+        padding: 12px;
+        background: var(--cherry);
+        border: none;
+        cursor: pointer;
+        border-radius: var(--radius);
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 12px;
         font-weight: 500;
-        color: var(--accent-gold);
+        color: #fff;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transition: opacity 0.2s;
       }
-      /* TOAST */
+      .modal-btn:hover {
+        opacity: 0.85;
+      }
+
+      /* ── TOAST ── */
       #toast {
         position: fixed;
-        bottom: 28px;
+        bottom: 24px;
         left: 50%;
-        transform: translateX(-50%) translateY(20px);
+        transform: translateX(-50%) translateY(16px);
         background: var(--bg-card);
         border: 1px solid var(--border-hover);
         color: var(--text-primary);
-        font-size: 13px;
-        padding: 12px 22px;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        padding: 11px 20px;
         border-radius: var(--radius);
         opacity: 0;
         pointer-events: none;
@@ -444,13 +551,7 @@
         opacity: 1;
         transform: translateX(-50%) translateY(0);
       }
-      /* DIVIDER */
-      .divider {
-        height: 1px;
-        background: var(--border);
-        margin: 28px 0;
-      }
-      /* RESPONSIVE */
+
       @media (max-width: 600px) {
         header {
           padding: 0 16px;
@@ -465,29 +566,55 @@
           display: none;
         }
         .progress-bar-sm {
-          width: 50px;
+          width: 48px;
         }
       }
     </style>
   </head>
   <body>
     <div class="app">
+      <!-- EMAIL MODAL -->
+      <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+          <div class="modal-title">
+            Welcome<span style="color: var(--cherry)">.</span>
+          </div>
+          <p class="modal-sub">
+            Enter your email to receive workout summaries and accountability
+            reports after each session.
+          </p>
+          <label class="modal-label">Your email</label>
+          <input
+            class="modal-input"
+            type="email"
+            id="modal-email"
+            placeholder="you@example.com"
+          />
+          <button class="modal-btn" onclick="saveEmail()">Let's go</button>
+        </div>
+      </div>
+
       <header>
-        <div class="logo">FORGE <span>/ Workout Tracker</span></div>
+        <div class="logo">Forge<span>.</span></div>
         <nav>
-          <button class="nav-btn active" onclick="showPage('plan')">
+          <button class="nav-btn active" onclick="showPage('plan', event)">
             Plan
           </button>
-          <button class="nav-btn" onclick="showPage('history')">History</button>
+          <button class="nav-btn" onclick="showPage('history', event)">
+            History
+          </button>
+          <button class="nav-btn" onclick="showPage('settings', event)">
+            Settings
+          </button>
         </nav>
       </header>
 
       <main>
-        <!-- PLAN PAGE -->
+        <!-- PLAN -->
         <div id="page-plan" class="page active">
           <h1 class="page-title">Weekly Plan</h1>
           <p class="page-sub">
-            Tap an exercise to mark it done. Complete all to finish the session.
+            Tap an exercise to mark it done. Send summary anytime.
           </p>
           <div id="next-banner" class="next-banner" style="display: none">
             <div class="next-banner-dot"></div>
@@ -499,11 +626,34 @@
           <div class="days-grid" id="days-grid"></div>
         </div>
 
-        <!-- HISTORY PAGE -->
+        <!-- HISTORY -->
         <div id="page-history" class="page">
           <h1 class="page-title">History</h1>
-          <p class="page-sub">All completed workout sessions.</p>
+          <p class="page-sub">All completed and partial sessions.</p>
           <div id="history-list"></div>
+        </div>
+
+        <!-- SETTINGS -->
+        <div id="page-settings" class="page">
+          <h1 class="page-title">Settings</h1>
+          <p class="page-sub">Manage your profile.</p>
+          <div
+            style="
+              background: var(--bg-card);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-lg);
+              padding: 24px;
+            "
+          >
+            <label class="modal-label">Your email</label>
+            <input
+              class="modal-input"
+              type="email"
+              id="settings-email"
+              placeholder="you@example.com"
+            />
+            <button class="btn-primary" onclick="updateEmail()">Save</button>
+          </div>
         </div>
       </main>
     </div>
@@ -511,13 +661,12 @@
     <div id="toast"></div>
 
     <script>
-      // ─── EMAILJS CONFIG ───────────────────────────────────────────────
+      // ── EMAILJS CONFIG ─────────────────────────────────────────────────
       const EMAILJS_PUBLIC_KEY = "hnh1w0L-aOdgqW25T";
       const EMAILJS_SERVICE_ID = "service_ss5z7rz";
       const EMAILJS_TEMPLATE_ID = "template_x2y80y9";
       const EMAILJS_SHAME_TEMPLATE_ID = "template_2c5abts";
-      const YOUR_EMAIL = "youssef.fathani1207@gmail.com";
-      // ─────────────────────────────────────────────────────────────────
+      // ──────────────────────────────────────────────────────────────────
 
       const DAYS = [
         {
@@ -795,14 +944,50 @@
         "saturday",
       ];
 
-      // ─── STATE ────────────────────────────────────────────────────────
+      // ── EMAIL STORAGE ─────────────────────────────────────────────────
+      function getUserEmail() {
+        return localStorage.getItem("wt_user_email") || "";
+      }
+      function setUserEmail(e) {
+        localStorage.setItem("wt_user_email", e);
+      }
+
+      function saveEmail() {
+        const val = document.getElementById("modal-email").value.trim();
+        if (!val || !val.includes("@")) {
+          toast("Please enter a valid email.");
+          return;
+        }
+        setUserEmail(val);
+        document.getElementById("modal-overlay").classList.add("hidden");
+        toast("Email saved — you're all set.");
+      }
+
+      function updateEmail() {
+        const val = document.getElementById("settings-email").value.trim();
+        if (!val || !val.includes("@")) {
+          toast("Please enter a valid email.");
+          return;
+        }
+        setUserEmail(val);
+        toast("Email updated.");
+      }
+
+      function checkModal() {
+        if (!getUserEmail()) {
+          document.getElementById("modal-overlay").classList.remove("hidden");
+        } else {
+          document.getElementById("modal-overlay").classList.add("hidden");
+        }
+      }
+
+      // ── STATE ─────────────────────────────────────────────────────────
       function todayKey() {
         return new Date().toISOString().slice(0, 10);
       }
       function stateKey(dayId) {
         return `wt_${dayId}_${todayKey()}`;
       }
-
       function loadState(dayId) {
         try {
           return JSON.parse(localStorage.getItem(stateKey(dayId))) || {};
@@ -824,7 +1009,7 @@
         localStorage.setItem("wt_history", JSON.stringify(h));
       }
 
-      // ─── RENDER PLAN ──────────────────────────────────────────────────
+      // ── RENDER ────────────────────────────────────────────────────────
       function render() {
         const grid = document.getElementById("days-grid");
         grid.innerHTML = "";
@@ -840,23 +1025,23 @@
             "day-card" +
             (completed ? " completed" : inProgress ? " in-progress" : "");
           card.innerHTML = `
-                  <div class="day-header" onclick="toggleDay('${day.id}')">
-                    <div class="day-dot"></div>
-                    <div>
-                      <div class="day-name">${day.name} <span class="day-label">${day.label}</span></div>
-                      <div class="day-label" style="margin-top:1px">${day.subtitle} · ${day.duration}</div>
-                    </div>
-                    <div class="day-progress-wrap">
-                      <span class="day-progress-text">${done}/${total}</span>
-                      <div class="progress-bar-sm"><div class="progress-bar-fill" style="width:${Math.round((done / total) * 100)}%"></div></div>
-                      <span class="chevron">▾</span>
-                    </div>
-                  </div>
-                  <div class="exo-body">
-                    <div class="exo-list" id="exo-${day.id}"></div>
-                    <div class="session-actions" id="actions-${day.id}"></div>
-                  </div>
-                `;
+      <div class="day-header" onclick="toggleDay('${day.id}')">
+        <div class="day-dot"></div>
+        <div>
+          <div class="day-name">${day.name} <span style="font-size:11px;font-family:'Space Grotesk';font-weight:300;color:var(--text-secondary);text-transform:none;letter-spacing:0">${day.label}</span></div>
+          <div class="day-label">${day.subtitle} · ${day.duration}</div>
+        </div>
+        <div class="day-progress-wrap">
+          <span class="day-progress-text">${done}/${total}</span>
+          <div class="progress-bar-sm"><div class="progress-bar-fill" style="width:${Math.round((done / total) * 100)}%"></div></div>
+          <span class="chevron">▾</span>
+        </div>
+      </div>
+      <div class="exo-body">
+        <div class="exo-list" id="exo-${day.id}"></div>
+        <div class="session-actions" id="actions-${day.id}"></div>
+      </div>
+    `;
           grid.appendChild(card);
 
           const list = document.getElementById(`exo-${day.id}`);
@@ -865,33 +1050,33 @@
             const row = document.createElement("div");
             row.className = "exo-row" + (isDone ? " done" : "");
             row.innerHTML = `
-                    <div class="exo-check">${isDone ? "✓" : ""}</div>
-                    <div><div class="exo-name">${ex.name}</div><div class="exo-muscle">${ex.muscle}</div></div>
-                    <div class="exo-sets">${ex.sets}</div>
-                    <div class="exo-rest">${ex.rest}</div>
-                  `;
+        <div class="exo-check">${isDone ? "✓" : ""}</div>
+        <div><div class="exo-name">${ex.name}</div><div class="exo-muscle">${ex.muscle}</div></div>
+        <div class="exo-sets">${ex.sets}</div>
+        <div class="exo-rest">${ex.rest}</div>
+      `;
             row.onclick = () => toggleExercise(day.id, i);
             list.appendChild(row);
           });
 
           const actions = document.getElementById(`actions-${day.id}`);
           if (completed) {
-            actions.innerHTML = `<button class="btn-ghost" onclick="resetDay('${day.id}', event)">Reset session</button>
-                    <button class="btn-primary" onclick="finishSession('${day.id}', event)">Send summary ✉</button>`;
+            actions.innerHTML = `
+        <button class="btn-ghost" onclick="resetDay('${day.id}', event)">Reset</button>
+        <button class="btn-primary" onclick="finishSession('${day.id}', event)">Send summary ✉</button>`;
           } else if (inProgress) {
-            actions.innerHTML = `<button class="btn-ghost" onclick="resetDay('${day.id}', event)">Reset</button>
-                    <button class="btn-primary" onclick="finishSession('${day.id}', event)">Send summary ✉</button>`;
+            actions.innerHTML = `
+        <button class="btn-ghost" onclick="resetDay('${day.id}', event)">Reset</button>
+        <button class="btn-primary" onclick="finishSession('${day.id}', event)">Send summary ✉</button>`;
           }
         });
-
         renderNextBanner();
       }
 
       function toggleDay(dayId) {
-        const cards = document.querySelectorAll(".day-card");
-        cards.forEach((c) => {
-          const header = c.querySelector(".day-header");
-          if (header.getAttribute("onclick") === `toggleDay('${dayId}')`) {
+        document.querySelectorAll(".day-card").forEach((c) => {
+          const h = c.querySelector(".day-header");
+          if (h && h.getAttribute("onclick") === `toggleDay('${dayId}')`) {
             c.classList.toggle("open");
           } else {
             c.classList.remove("open");
@@ -904,15 +1089,10 @@
         state[index] = !state[index];
         saveState(dayId, state);
         render();
-        const cards = document.querySelectorAll(".day-card");
-        cards.forEach((c) => {
-          const header = c.querySelector(".day-header");
-          if (
-            header &&
-            header.getAttribute("onclick") === `toggleDay('${dayId}')`
-          ) {
+        document.querySelectorAll(".day-card").forEach((c) => {
+          const h = c.querySelector(".day-header");
+          if (h && h.getAttribute("onclick") === `toggleDay('${dayId}')`)
             c.classList.add("open");
-          }
         });
       }
 
@@ -922,7 +1102,7 @@
         render();
       }
 
-      // ─── NEXT SESSION BANNER ──────────────────────────────────────────
+      // ── NEXT BANNER ───────────────────────────────────────────────────
       function renderNextBanner() {
         const banner = document.getElementById("next-banner");
         const todayDow = new Date().getDay();
@@ -935,21 +1115,19 @@
           saturday: 6,
         };
         let next = null;
-        for (let i = 0; i < ORDER.length; i++) {
-          const d = ORDER[i];
+        for (const d of ORDER) {
           const state = loadState(d);
           const done = DAYS.find((x) => x.id === d).exercises.filter(
             (_, j) => state[j],
           ).length;
           const total = DAYS.find((x) => x.id === d).exercises.length;
-          if (done < total && dowMap[d] >= todayDow) {
+          if (done < total && (dowMap[d] || 7) >= todayDow) {
             next = d;
             break;
           }
         }
         if (!next) {
-          for (let i = 0; i < ORDER.length; i++) {
-            const d = ORDER[i];
+          for (const d of ORDER) {
             const state = loadState(d);
             const done = DAYS.find((x) => x.id === d).exercises.filter(
               (_, j) => state[j],
@@ -971,7 +1149,7 @@
         }
       }
 
-      // ─── FINISH SESSION / EMAIL ───────────────────────────────────────
+      // ── FINISH SESSION ────────────────────────────────────────────────
       function finishSession(dayId, e) {
         e.stopPropagation();
         const day = DAYS.find((d) => d.id === dayId);
@@ -980,14 +1158,11 @@
         const done = day.exercises.filter((_, i) => state[i]).length;
         const completed = done === total;
 
-        const doneExos = day.exercises
-          .filter((_, i) => state[i])
-          .map((ex) => `• ${ex.name} — ${ex.sets}`)
-          .join("\n");
-
-        const nextIdx = (ORDER.indexOf(dayId) + 1) % ORDER.length;
-        const nextDay = DAYS.find((d) => d.id === ORDER[nextIdx]);
-        const nextLine = `${nextDay.name} — ${nextDay.subtitle} (${nextDay.duration})`;
+        const userEmail = getUserEmail();
+        if (!userEmail) {
+          toast("No email set — go to Settings.");
+          return;
+        }
 
         const today = new Date().toLocaleDateString("en-GB", {
           weekday: "long",
@@ -995,14 +1170,22 @@
           month: "long",
           year: "numeric",
         });
+        const doneExos = day.exercises
+          .filter((_, i) => state[i])
+          .map((ex) => `• ${ex.name} — ${ex.sets}`)
+          .join("\n");
+        const leftExos = day.exercises
+          .filter((_, i) => !state[i])
+          .map((ex) => `• ${ex.name}`)
+          .join("\n");
 
-        const body = `Session completed: ${day.name} — ${today}\n\nExercises done:\n${doneExos}\n\n───\nNext session: ${nextLine}`;
+        const nextIdx = (ORDER.indexOf(dayId) + 1) % ORDER.length;
+        const nextDay = DAYS.find((d) => d.id === ORDER[nextIdx]);
+        const nextLine = `${nextDay.name} — ${nextDay.subtitle}`;
 
         if (EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY") {
-          toast(
-            "EmailJS not configured yet — add your credentials in the script.",
-          );
-          saveToHistory(dayId, day, doneExos, nextLine);
+          toast("EmailJS not configured — add your credentials.");
+          saveToHistory(dayId, day, state);
           return;
         }
 
@@ -1012,26 +1195,25 @@
           : EMAILJS_SHAME_TEMPLATE_ID;
         emailjs
           .send(EMAILJS_SERVICE_ID, templateId, {
-            to_email: YOUR_EMAIL,
+            to_email: userEmail,
             day_name: `${day.name} · ${day.subtitle}`,
             session_date: today,
-            exercises_done: doneExos,
-            exercises_left: day.exercises
-              .filter((_, i) => !state[i])
-              .map((ex) => `• ${ex.name}`)
-              .join("\n"),
+            exercises_done: doneExos || "—",
+            exercises_left: leftExos || "—",
+            next_session: nextLine,
           })
           .then(() => {
-            toast("Summary sent to your email ✓");
-            saveToHistory(dayId, day, doneExos, nextLine);
+            toast(
+              completed ? "Summary sent ✓" : "Shame report sent. Go finish it.",
+            );
+            saveToHistory(dayId, day, state);
           })
           .catch(() => {
             toast("Email failed — check your EmailJS config.");
-            saveToHistory(dayId, day, doneExos, nextLine);
           });
       }
 
-      function saveToHistory(dayId, day, doneExos, nextLine) {
+      function saveToHistory(dayId, day, state) {
         const history = loadHistory();
         history.unshift({
           dayId,
@@ -1040,19 +1222,18 @@
           date: new Date().toISOString(),
           exercises: day.exercises.map((ex, i) => ({
             name: ex.name,
-            done: !!loadState(dayId)[i],
+            done: !!state[i],
           })),
-          next: nextLine,
         });
         saveHistory(history);
       }
 
-      // ─── HISTORY PAGE ─────────────────────────────────────────────────
+      // ── HISTORY PAGE ──────────────────────────────────────────────────
       function renderHistory() {
         const container = document.getElementById("history-list");
         const history = loadHistory();
         if (!history.length) {
-          container.innerHTML = `<div class="history-empty"><div class="empty-icon">◎</div>No sessions yet. Complete your first workout to see it here.</div>`;
+          container.innerHTML = `<div class="history-empty">No sessions yet.</div>`;
           return;
         }
         container.innerHTML = "";
@@ -1073,19 +1254,24 @@
             )
             .join("");
           card.innerHTML = `
-                  <div class="history-top">
-                    <div class="history-day-name">${h.dayName} <span style="font-size:13px;color:var(--text-secondary);font-family:'DM Sans'">${h.subtitle}</span></div>
-                    <div class="history-date">${dateStr}</div>
-                  </div>
-                  <div class="history-exos">${tags}</div>
-                  ${h.next ? `<div style="margin-top:12px;font-size:11px;color:var(--text-muted)">Next: ${h.next}</div>` : ""}
-                `;
+      <div class="history-top">
+        <div class="history-day-name">${h.dayName} <span style="font-size:11px;font-family:'Space Grotesk';font-weight:300;color:var(--text-secondary);text-transform:none;letter-spacing:0">${h.subtitle}</span></div>
+        <div class="history-date">${dateStr}</div>
+      </div>
+      <div class="history-exos">${tags}</div>
+    `;
           container.appendChild(card);
         });
       }
 
-      // ─── NAV ──────────────────────────────────────────────────────────
-      function showPage(name) {
+      // ── SETTINGS PAGE ─────────────────────────────────────────────────
+      function renderSettings() {
+        const input = document.getElementById("settings-email");
+        if (input) input.value = getUserEmail();
+      }
+
+      // ── NAV ───────────────────────────────────────────────────────────
+      function showPage(name, event) {
         document
           .querySelectorAll(".page")
           .forEach((p) => p.classList.remove("active"));
@@ -1093,11 +1279,12 @@
           .querySelectorAll(".nav-btn")
           .forEach((b) => b.classList.remove("active"));
         document.getElementById(`page-${name}`).classList.add("active");
-        event.target.classList.add("active");
+        if (event && event.target) event.target.classList.add("active");
         if (name === "history") renderHistory();
+        if (name === "settings") renderSettings();
       }
 
-      // ─── TOAST ────────────────────────────────────────────────────────
+      // ── TOAST ─────────────────────────────────────────────────────────
       function toast(msg) {
         const t = document.getElementById("toast");
         t.textContent = msg;
@@ -1105,7 +1292,8 @@
         setTimeout(() => t.classList.remove("show"), 3200);
       }
 
-      // ─── INIT ─────────────────────────────────────────────────────────
+      // ── INIT ──────────────────────────────────────────────────────────
+      checkModal();
       render();
     </script>
   </body>
