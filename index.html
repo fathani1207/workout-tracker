@@ -662,172 +662,49 @@
 
     <script>
       // ── EMAILJS CONFIG ─────────────────────────────────────────────────
-      const EMAILJS_PUBLIC_KEY = "hnh1w0L-aOdgqW25T";
-      const EMAILJS_SERVICE_ID = "service_ss5z7rz";
-      const EMAILJS_TEMPLATE_ID = "template_x2y80y9";
-      const EMAILJS_SHAME_TEMPLATE_ID = "template_2c5abts";
+      const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+      const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+      const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+      const EMAILJS_SHAME_TEMPLATE_ID = "YOUR_SHAME_TEMPLATE_ID";
       // ──────────────────────────────────────────────────────────────────
 
       const DAYS = [
         {
           id: "monday",
           label: "Monday",
-          name: "Push",
-          subtitle: "Chest · Shoulders · Triceps",
-          duration: "~60 min",
-          exercises: [
-            {
-              name: "Barbell bench press",
-              muscle: "Chest",
-              sets: "4 × 6–8",
-              rest: "2–3 min",
-            },
-            {
-              name: "Incline dumbbell press",
-              muscle: "Upper chest",
-              sets: "3 × 8–10",
-              rest: "90 s",
-            },
-            {
-              name: "Lateral raises",
-              muscle: "Side delts",
-              sets: "4 × 12–15",
-              rest: "60 s",
-            },
-            {
-              name: "Overhead dumbbell press",
-              muscle: "Shoulders",
-              sets: "3 × 8–10",
-              rest: "90 s",
-            },
-            {
-              name: "Weighted dips / Skull crusher",
-              muscle: "Triceps",
-              sets: "3 × 8–10",
-              rest: "90 s",
-            },
-            {
-              name: "Cable pushdown (rope)",
-              muscle: "Long head triceps",
-              sets: "3 × 12–15",
-              rest: "60 s",
-            },
-          ],
-        },
-        {
-          id: "tuesday",
-          label: "Tuesday",
-          name: "Pull",
-          subtitle: "Back · Biceps · Rear delts",
-          duration: "~60 min + LISS 20 min",
-          exercises: [
-            {
-              name: "Pull-ups / Lat pulldown",
-              muscle: "Lats, width",
-              sets: "4 × 6–8",
-              rest: "2–3 min",
-            },
-            {
-              name: "Barbell row (pronated)",
-              muscle: "Thick back",
-              sets: "4 × 6–8",
-              rest: "2 min",
-            },
-            {
-              name: "Unilateral dumbbell row",
-              muscle: "Lats",
-              sets: "3 × 10–12",
-              rest: "60 s",
-            },
-            {
-              name: "Face pulls (cable)",
-              muscle: "Rear delts, traps",
-              sets: "3 × 15–20",
-              rest: "60 s",
-            },
-            {
-              name: "EZ bar curl",
-              muscle: "Biceps",
-              sets: "3 × 8–10",
-              rest: "90 s",
-            },
-            {
-              name: "Hammer curl",
-              muscle: "Brachialis",
-              sets: "3 × 10–12",
-              rest: "60 s",
-            },
-          ],
-        },
-        {
-          id: "wednesday",
-          label: "Wednesday",
-          name: "Legs",
-          subtitle: "Quads · Hamstrings · Calves",
+          name: "Strength A",
+          subtitle: "Lower dominant · Full body",
           duration: "~65 min",
           exercises: [
             {
-              name: "Barbell squat",
+              name: "Smith machine squat",
               muscle: "Quads, glutes",
               sets: "4 × 6–8",
-              rest: "3 min",
+              rest: "2 min",
             },
             {
-              name: "Leg press",
+              name: "Romanian deadlift (barbell)",
+              muscle: "Hamstrings, glutes",
+              sets: "4 × 8–10",
+              rest: "2 min",
+            },
+            {
+              name: "Leg press machine",
               muscle: "Quads, volume",
               sets: "3 × 10–12",
-              rest: "2 min",
+              rest: "90 s",
             },
             {
-              name: "Lying leg curl",
-              muscle: "Hamstrings",
+              name: "Machine chest press (flat)",
+              muscle: "Chest",
               sets: "3 × 10–12",
               rest: "90 s",
             },
             {
-              name: "Romanian deadlift (DB)",
-              muscle: "Hamstrings, glutes",
-              sets: "3 × 8–10",
-              rest: "2 min",
-            },
-            {
-              name: "Walking lunges (DB)",
-              muscle: "Glutes, balance",
-              sets: "3 × 12/leg",
+              name: "Seated cable row",
+              muscle: "Back thickness",
+              sets: "3 × 10–12",
               rest: "90 s",
-            },
-            {
-              name: "Standing calf raise",
-              muscle: "Gastrocnemius",
-              sets: "4 × 12–15",
-              rest: "60 s",
-            },
-          ],
-        },
-        {
-          id: "thursday",
-          label: "Thursday",
-          name: "Upper",
-          subtitle: "Chest · Back · Shoulders · Arms",
-          duration: "~55 min + HIIT 15–20 min",
-          exercises: [
-            {
-              name: "Incline dumbbell press",
-              muscle: "Upper chest (2nd)",
-              sets: "3 × 8–10",
-              rest: "90 s",
-            },
-            {
-              name: "Barbell row (supinated)",
-              muscle: "Back (2nd)",
-              sets: "3 × 8–10",
-              rest: "90 s",
-            },
-            {
-              name: "Military press (barbell)",
-              muscle: "Shoulders (2nd)",
-              sets: "3 × 6–8",
-              rest: "2 min",
             },
             {
               name: "Cable lateral raises",
@@ -836,25 +713,172 @@
               rest: "60 s",
             },
             {
-              name: "Incline dumbbell curl",
-              muscle: "Biceps (full stretch)",
-              sets: "3 × 10–12",
-              rest: "60 s",
+              name: "Plank",
+              muscle: "Core, stability",
+              sets: "3 × 45 s",
+              rest: "45 s",
+            },
+          ],
+        },
+        {
+          id: "tuesday",
+          label: "Tuesday",
+          name: "Metcon A",
+          subtitle: "Full body circuit · Fat burn",
+          duration: "~50 min",
+          exercises: [
+            {
+              name: "Goblet squat (dumbbell)",
+              muscle: "Quads, glutes",
+              sets: "4 rounds × 45 s",
+              rest: "15 s",
             },
             {
-              name: "Overhead cable extension",
-              muscle: "Long head triceps",
+              name: "Dumbbell push press",
+              muscle: "Shoulders, triceps",
+              sets: "4 rounds × 45 s",
+              rest: "15 s",
+            },
+            {
+              name: "Dumbbell Romanian deadlift",
+              muscle: "Hamstrings, glutes",
+              sets: "4 rounds × 45 s",
+              rest: "15 s",
+            },
+            {
+              name: "Cable face pulls",
+              muscle: "Rear delts, traps",
+              sets: "4 rounds × 45 s",
+              rest: "15 s",
+            },
+            {
+              name: "Mountain climbers",
+              muscle: "Core, cardio",
+              sets: "4 rounds × 45 s",
+              rest: "15 s",
+            },
+            {
+              name: "Hanging knee raises",
+              muscle: "Abs, hip flexors",
+              sets: "4 rounds × 45 s",
+              rest: "90 s/round",
+            },
+            {
+              name: "Incline treadmill walk (finisher)",
+              muscle: "Fat burn, low impact",
+              sets: "15 min max incline",
+              rest: "—",
+            },
+          ],
+        },
+        {
+          id: "wednesday",
+          label: "Wednesday",
+          name: "Strength B",
+          subtitle: "Upper dominant · Full body",
+          duration: "~65 min",
+          exercises: [
+            {
+              name: "Smith machine bench press",
+              muscle: "Chest",
+              sets: "4 × 6–8",
+              rest: "2 min",
+            },
+            {
+              name: "Lat pulldown machine",
+              muscle: "Lats, width",
+              sets: "4 × 6–8",
+              rest: "2 min",
+            },
+            {
+              name: "Dumbbell incline press",
+              muscle: "Upper chest",
+              sets: "3 × 10–12",
+              rest: "90 s",
+            },
+            {
+              name: "Machine chest-supported row",
+              muscle: "Back thickness",
+              sets: "3 × 10–12",
+              rest: "90 s",
+            },
+            {
+              name: "Smith machine overhead press",
+              muscle: "Shoulders",
+              sets: "3 × 10–12",
+              rest: "90 s",
+            },
+            {
+              name: "EZ bar curl",
+              muscle: "Biceps",
+              sets: "3 × 10–12",
+              rest: "90 s",
+            },
+            {
+              name: "Cable triceps pushdown (rope)",
+              muscle: "Triceps",
               sets: "3 × 12–15",
               rest: "60 s",
             },
           ],
         },
         {
+          id: "thursday",
+          label: "Thursday",
+          name: "Metcon B",
+          subtitle: "Full body HIIT · Max burn",
+          duration: "~50 min",
+          exercises: [
+            {
+              name: "Jump squats",
+              muscle: "Quads, explosive",
+              sets: "3 rounds × 40 s",
+              rest: "20 s",
+            },
+            {
+              name: "Dumbbell thrusters",
+              muscle: "Full body",
+              sets: "3 rounds × 40 s",
+              rest: "20 s",
+            },
+            {
+              name: "Burpees",
+              muscle: "Full body, cardio",
+              sets: "3 rounds × 40 s",
+              rest: "20 s",
+            },
+            {
+              name: "Dumbbell renegade rows",
+              muscle: "Back, core",
+              sets: "3 rounds × 40 s",
+              rest: "20 s",
+            },
+            {
+              name: "Box step-ups (fast)",
+              muscle: "Glutes, quads",
+              sets: "3 rounds × 40 s",
+              rest: "20 s",
+            },
+            {
+              name: "Ab wheel rollout",
+              muscle: "Core, abs",
+              sets: "3 rounds × 40 s",
+              rest: "2 min/round",
+            },
+            {
+              name: "Rowing machine sprint (finisher)",
+              muscle: "Full body, cardio",
+              sets: "10 min high effort",
+              rest: "—",
+            },
+          ],
+        },
+        {
           id: "friday",
           label: "Friday",
-          name: "Lower",
-          subtitle: "Squat · Hip hinge · Core",
-          duration: "~60 min",
+          name: "Strength C",
+          subtitle: "Full body heavy · Core finish",
+          duration: "~65 min",
           exercises: [
             {
               name: "Conventional deadlift",
@@ -863,86 +887,46 @@
               rest: "3 min",
             },
             {
-              name: "Goblet squat / Hack squat",
-              muscle: "Quads (2nd)",
-              sets: "3 × 10–12",
-              rest: "2 min",
-            },
-            {
-              name: "Hip thrust (barbell)",
+              name: "Hip thrust (Smith machine)",
               muscle: "Glutes, isolation",
               sets: "4 × 10–12",
               rest: "90 s",
             },
             {
-              name: "Seated leg curl",
-              muscle: "Hamstrings (2nd)",
+              name: "Leg extension machine",
+              muscle: "Quads (isolation)",
               sets: "3 × 12–15",
+              rest: "90 s",
+            },
+            {
+              name: "Lying leg curl machine",
+              muscle: "Hamstrings",
+              sets: "3 × 12–15",
+              rest: "90 s",
+            },
+            {
+              name: "Cable crunch kneeling",
+              muscle: "Abs",
+              sets: "3 × 15–20",
               rest: "60 s",
             },
             {
-              name: "Plank variations",
-              muscle: "Core, stability",
-              sets: "3 × 30–45s",
-              rest: "45 s",
+              name: "Rotary torso machine (each side)",
+              muscle: "Obliques",
+              sets: "3 × 15",
+              rest: "60 s",
             },
             {
-              name: "Crunches / Ab wheel",
-              muscle: "Abs",
-              sets: "3 × 15–20",
-              rest: "45 s",
-            },
-          ],
-        },
-        {
-          id: "saturday",
-          label: "Saturday",
-          name: "Cardio",
-          subtitle: "Intense circuit",
-          duration: "~40–50 min",
-          exercises: [
-            {
-              name: "Warm-up: brisk walk / light bike",
-              muscle: "Gradual HR raise",
-              sets: "5–8 min",
-              rest: "—",
-            },
-            {
-              name: "Circuit A ×4: Burpees + Jump squats + Mountain climbers",
-              muscle: "Cardio + explosive",
-              sets: "10/15/20",
-              rest: "60 s/round",
-            },
-            {
-              name: "Circuit B ×3: KB swing + Box jump + Row sprint",
-              muscle: "Power, posterior chain",
-              sets: "15/10/30s",
-              rest: "90 s/round",
-            },
-            {
-              name: "Finisher: jump rope or sprint bike",
-              muscle: "Glycogen depletion",
-              sets: "5 min",
-              rest: "—",
-            },
-            {
-              name: "Cool-down: static stretching",
-              muscle: "Active recovery",
-              sets: "5–10 min",
-              rest: "—",
+              name: "Abdominal crunch machine",
+              muscle: "Abs, isolation",
+              sets: "3 × 20",
+              rest: "60 s",
             },
           ],
         },
       ];
 
-      const ORDER = [
-        "monday",
-        "tuesday",
-        "wednesday",
-        "thursday",
-        "friday",
-        "saturday",
-      ];
+      const ORDER = ["monday", "tuesday", "wednesday", "thursday", "friday"];
 
       // ── EMAIL STORAGE ─────────────────────────────────────────────────
       function getUserEmail() {
